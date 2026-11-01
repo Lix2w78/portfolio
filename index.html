@@ -14,7 +14,6 @@
             --accent-hover: #821f1f;
             --glitch-secondary: #3a404a;
             --border-radius: 10px;
-            /* диагональные линии: чуть светлее фона карточки, с лёгким розовым оттенком */
             --lines: repeating-linear-gradient(45deg, transparent 0 10px, rgba(255, 238, 241, 0.95) 10px 12px);
         }
 
@@ -134,7 +133,6 @@
         section { margin-bottom: 60px; position: relative; }
         h2 { color: var(--text-main); border-bottom: 2px solid var(--accent); padding-bottom: 10px; font-weight: 600; letter-spacing: 0.5px; }
 
-        /* Появление при скролле */
         .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
         .reveal.in { opacity: 1; transform: none; }
 
@@ -152,7 +150,6 @@
         .project-card:hover { transform: translateX(4px); box-shadow: 0 8px 22px rgba(0,0,0,0.1); }
         .project-card h3 { margin-top: 0; color: var(--text-main); }
 
-
         .project-card, .finni-container { overflow: hidden; }
         .project-card::after, .finni-container::after {
             content: ''; position: absolute; top: 0; bottom: 0; left: -60%; width: 40%;
@@ -161,11 +158,9 @@
         }
         .project-card.shine::after, .finni-container.shine::after { animation: shine-once 1.4s ease 0.3s 1; }
         @keyframes shine-once { from { left: -60%; } to { left: 130%; } }
-        /* при наведении — спокойная подсветка вместо блика */
         .project-card:hover { border-left-width: 8px; }
         .room-viewer, .sb-screen { touch-action: pan-y; }
         .inventory-content .cg-viewer { display: block; }
-
 
         .room-viewer {
             display: none; margin-top: 20px; position: relative;
@@ -188,24 +183,30 @@
         .nav-left { left: 15px; }
         .nav-right { right: 15px; }
 
-        .btn-back-circle { position: absolute; top: 15px; left: 15px; width: 55px; height: 55px; border-radius: 50%; background: #26292e; color: white; border: 2px solid white; cursor: pointer; z-index: 10; font-size: 0.75em; font-weight: bold; box-shadow: 0 4px 8px rgba(0,0,0,0.3); transition: transform 0.3s, background 0.3s; display: flex; align-items: center; justify-content: center; text-transform: uppercase; }
+        .btn-back-circle { 
+            position: absolute; top: 15px; left: 15px; 
+            width: 48px; height: 48px; border-radius: 50%; 
+            background: #26292e; border: 2px solid var(--accent); 
+            cursor: pointer; z-index: 25; 
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3); 
+            transition: transform 0.3s, background 0.3s; 
+            display: flex; align-items: center; justify-content: center; 
+            padding: 0; font-size: 0;
+        }
+        .btn-back-circle::before {
+            content: ''; width: 22px; height: 22px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 6l12 12M18 6L6 18' stroke='white' stroke-width='2.8' stroke-linecap='round' fill='none'/%3E%3C/svg%3E") center / contain no-repeat;
+        }
         .btn-back-circle:hover { background: #3f444c; transform: scale(1.1); }
-
-        .btn-inventory-circle { position: absolute; top: 15px; right: 15px; width: 55px; height: 55px; border-radius: 50%; background: var(--accent); color: white; border: 2px solid white; cursor: pointer; z-index: 10; font-size: 0.8em; font-weight: bold; box-shadow: 0 4px 8px rgba(0,0,0,0.3); transition: transform 0.3s, background 0.3s; display: flex; align-items: center; justify-content: center; }
-        .btn-inventory-circle:hover { background: var(--accent-hover); transform: scale(1.1); }
 
         .furniture-controls { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 15px; z-index: 10; }
         .btn-circle { width: 70px; height: 70px; border-radius: 50%; background: #26292e; color: white; border: 2px solid var(--accent); cursor: pointer; font-size: 0.85em; font-weight: bold; box-shadow: 0 4px 8px rgba(0,0,0,0.3); transition: transform 0.3s, background 0.3s; display: flex; align-items: center; justify-content: center; }
         .btn-circle:hover { background: var(--accent); transform: scale(1.1); }
 
-        .inventory-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(20,22,25,0.88); z-index: 1000; overflow-y: auto; padding: 40px 20px; box-sizing: border-box; backdrop-filter: blur(5px); }
-        .inventory-content { max-width: 900px; margin: 0 auto; background-color: var(--card-bg); background-image: var(--lines); padding: 30px; border-radius: 12px; text-align: center; border: 2px solid var(--accent); }
-        .inventory-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px; }
-        .inventory-grid img { width: 100%; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.12); transition: 0.3s; cursor: zoom-in; background: #fff; }
-        .inventory-grid img:hover { transform: scale(1.04); box-shadow: 0 8px 18px rgba(166, 43, 43, 0.28); }
-        .close-btn { background: var(--accent); color: white; border: none; padding: 12px 24px; border-radius: 6px; cursor: pointer; font-size: 1em; margin-bottom: 20px; font-weight: bold; transition: 0.2s; }
-        .close-btn:hover { background: var(--accent-hover); }
-
+        .inventory-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(20,22,25,0.88); z-index: 1000; overflow-y: auto; padding: 25px 20px; box-sizing: border-box; backdrop-filter: blur(5px); }
+        .inventory-content { max-width: 900px; margin: 0 auto; background-color: var(--card-bg); background-image: var(--lines); padding: 20px 30px 30px; border-radius: 12px; text-align: center; border: 2px solid var(--accent); position: relative; }
+        .inventory-content h2 { margin-top: 5px; margin-bottom: 10px; }
+        
         .sb-viewer { display: none; margin-top: 20px; position: relative; width: 100%; max-width: 800px; height: clamp(320px, 62vw, 500px); margin-left: auto; margin-right: auto; border: 2px solid var(--accent); border-radius: 12px; overflow: hidden; background-color: #26292e; box-shadow: 0 10px 24px rgba(0,0,0,0.18); }
         .sb-screen { display: none; width: 100%; height: 100%; position: absolute; top: 0; left: 0; }
         .sb-screen.active { display: block; }
@@ -223,7 +224,7 @@
         .overlay-group { display: flex; justify-content: center; gap: 20px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 5; width: 90%; }
         .overlay-group img { max-width: 45%; max-height: 70vh; object-fit: contain; }
 
-        .cg-viewer { display: none; margin-top: 20px; position: relative; width: 100%; max-width: 800px; height: clamp(300px, 60vw, 450px); margin-left: auto; margin-right: auto; border: 2px solid var(--accent); border-radius: 12px; overflow: hidden; background-color: #d2d6dc; background-image: var(--lines); box-shadow: 0 10px 24px rgba(0,0,0,0.15); cursor: grab; touch-action: pan-y; }
+        .cg-viewer { display: none; margin-top: 15px; position: relative; width: 100%; max-width: 800px; height: clamp(300px, 60vw, 450px); margin-left: auto; margin-right: auto; border: 2px solid var(--accent); border-radius: 12px; overflow: hidden; background-color: #d2d6dc; background-image: var(--lines); box-shadow: 0 10px 24px rgba(0,0,0,0.15); cursor: grab; touch-action: pan-y; }
         .cg-viewer:active { cursor: grabbing; }
         .cg-carousel { position: relative; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; overflow: hidden; }
         .cg-item { position: absolute; width: min(320px, 55%); max-height: 78%; object-fit: contain; transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1); border-radius: 8px; box-shadow: 0 8px 20px rgba(0,0,0,0.25); pointer-events: none; user-select: none; -webkit-user-drag: none; }
@@ -249,7 +250,7 @@
         }
         @media (max-width: 600px) {
             .sb-kitchen-btn { padding: 6px 10px; font-size: 0.8em; }
-            .btn-back-circle, .btn-inventory-circle { width: 46px; height: 46px; }
+            .btn-back-circle { width: 42px; height: 42px; }
             .btn-circle { width: 58px; height: 58px; font-size: 0.75em; }
         }
         @media (prefers-reduced-motion: reduce) {
@@ -258,7 +259,7 @@
             h1:hover, h2:hover { animation: none; }
         }
 
-        .btn, .close-btn, .btn-back-circle, .btn-inventory-circle, .sb-top-right-btn, .sb-kitchen-btn {
+        .btn, .sb-top-right-btn, .sb-kitchen-btn, .btn-inventory-circle {
             display: inline-flex; align-items: center; justify-content: flex-start; gap: 10px;
             width: auto; height: auto; background: #26292e; color: #fff;
             border: 1px solid rgba(255,255,255,0.14); border-radius: 999px;
@@ -267,23 +268,29 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.28); cursor: pointer;
             transition: transform 0.25s, box-shadow 0.25s, background 0.25s;
         }
-        .btn::before, .close-btn::before, .btn-back-circle::before, .btn-inventory-circle::before, .sb-top-right-btn::before, .sb-kitchen-btn::before {
+        .btn::before, .sb-top-right-btn::before, .sb-kitchen-btn::before, .btn-inventory-circle::before {
             content: ''; width: 38px; height: 38px; border-radius: 50%; flex-shrink: 0;
             background: var(--accent) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M12 1l2.6 8.4L23 12l-8.4 2.6L12 23l-2.6-8.4L1 12l8.4-2.6z'/%3E%3C/svg%3E") center / 55% no-repeat;
             box-shadow: inset 0 0 0 2px rgba(255,255,255,0.35);
             transition: transform 0.4s ease;
         }
-        .close-btn::before, .btn-back-circle::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 6l12 12M18 6L6 18' stroke='white' stroke-width='2.6' stroke-linecap='round' fill='none'/%3E%3C/svg%3E"); }
-        .btn-back-circle::before { background-color: #3a404a; box-shadow: inset 0 0 0 2px var(--accent); }
-        .btn:hover, .close-btn:hover, .btn-back-circle:hover, .btn-inventory-circle:hover, .sb-top-right-btn:hover {
+        .btn-inventory-circle::before { 
+            background-color: var(--accent);
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M20 6h-4V4c0-1.1-.9-2-2-2h-4c-1.1 0-2 .9-2 2v2H4c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zM10 4h4v2h-4V4zm10 15H4V8h16v11z'/%3E%3C/svg%3E"); 
+        }
+        .btn:hover, .sb-top-right-btn:hover, .btn-inventory-circle:hover {
             background: #343840; transform: translateY(-2px); box-shadow: 0 6px 16px rgba(166,43,43,0.4);
         }
-        .btn:hover::before, .close-btn:hover::before, .btn-back-circle:hover::before, .btn-inventory-circle:hover::before, .sb-top-right-btn:hover::before, .sb-kitchen-btn:hover::before { transform: rotate(90deg) scale(1.08); }
+        .btn:hover::before, .sb-top-right-btn::before, .sb-kitchen-btn::before, .btn-inventory-circle:hover::before { transform: rotate(90deg) scale(1.08); }
         .btn { margin: 5px 5px 5px 0; }
         .sb-kitchen-menu { align-items: flex-end; }
         .sb-kitchen-btn { padding: 4px 14px 4px 4px; font-size: 0.8em; }
         .sb-kitchen-btn::before { width: 30px; height: 30px; }
         .sb-kitchen-btn:hover { background: #343840; transform: translateX(-5px); }
+
+        .room-viewer .btn-inventory-circle {
+            position: absolute; top: 15px; right: 15px; z-index: 25;
+        }
 
         .btn-circle {
             width: 72px; height: 72px; flex-direction: column; gap: 3px; padding: 0;
@@ -297,21 +304,22 @@
         .btn-circle.on { background: radial-gradient(circle at 30% 25%, #c24444, var(--accent)); border-color: #fff; box-shadow: 0 0 0 4px rgba(166,43,43,0.35), 0 6px 16px rgba(166,43,43,0.55); }
 
         @media (max-width: 600px) {
-            .btn, .close-btn, .btn-back-circle, .btn-inventory-circle, .sb-top-right-btn { font-size: 0.78em; }
-            .btn::before, .close-btn::before, .btn-back-circle::before, .btn-inventory-circle::before, .sb-top-right-btn::before { width: 32px; height: 32px; }
+            .btn, .sb-top-right-btn, .btn-inventory-circle { font-size: 0.78em; }
+            .btn::before, .sb-top-right-btn::before, .btn-inventory-circle::before { width: 32px; height: 32px; }
             .btn-circle { width: 60px; height: 60px; font-size: 0.6em; }
             .btn-circle svg { width: 22px; height: 22px; }
-            .btn-circle::before { display: none; }
         }
 
         .nav-arrow {
+            position: absolute; top: 50%; transform: translateY(-50%);
             width: 48px; height: 48px; padding: 0; font-size: 0; border-radius: 50%;
             background: #26292e center / 50% no-repeat; border: 2px solid var(--accent);
             box-shadow: 0 4px 10px rgba(0,0,0,0.35), inset 0 0 0 3px rgba(255,255,255,0.06);
+            cursor: pointer; z-index: 20; display: flex; align-items: center; justify-content: center;
             transition: transform 0.25s, background-color 0.25s, box-shadow 0.25s;
         }
-        .nav-left  { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M15 5l-7 7 7 7' stroke='white' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E"); }
-        .nav-right { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9 5l7 7-7 7' stroke='white' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E"); }
+        .nav-left  { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M15 5l-7 7 7 7' stroke='white' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E"); left: 15px; }
+        .nav-right { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9 5l7 7-7 7' stroke='white' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E"); right: 15px; }
         .nav-arrow:hover { background-color: var(--accent); box-shadow: 0 0 0 4px rgba(166,43,43,0.3), 0 6px 14px rgba(0,0,0,0.4); }
         .nav-left:hover  { transform: translateY(-50%) translateX(-3px); }
         .nav-right:hover { transform: translateY(-50%) translateX(3px); }
@@ -410,7 +418,7 @@
                 <button class="nav-arrow nav-left" onclick="changeBg(-1)" aria-label="Предыдущий фон">&lt;</button>
                 <button class="nav-arrow nav-right" onclick="changeBg(1)" aria-label="Следующий фон">&gt;</button>
 
-                <button class="btn-back-circle" onclick="closeRoom()">Назад</button>
+                <button class="btn-back-circle" onclick="closeRoom()" aria-label="Закрыть"></button>
                 <button class="btn-inventory-circle" onclick="openInventory()">Инвентарь</button>
 
                 <div class="furniture-controls">
@@ -437,13 +445,13 @@
                     <button class="nav-arrow nav-left" onclick="changeSbCafe(-1)" aria-label="Назад">&lt;</button>
                     <button class="nav-arrow nav-right" onclick="changeSbCafe(1)" aria-label="Вперёд">&gt;</button>
 
-                    <button class="btn-back-circle" onclick="closeSbViewer()">Назад</button>
+                    <button class="btn-back-circle" onclick="closeSbViewer()" aria-label="Закрыть"></button>
                     <button class="sb-top-right-btn" onclick="switchSbScreen('sb-screen-kitchen')">Кухня</button>
                 </div>
 
                 <div class="sb-screen" id="sb-screen-kitchen">
                     <video src="v2.MP4" class="sb-bg-layer active" id="sb-video" autoplay loop muted playsinline disablepictureinpicture disableremoteplayback oncontextmenu="return false" style="pointer-events:none;"></video>
-                    <button class="btn-back-circle" onclick="switchSbScreen('sb-screen-cafe')">Назад</button>
+                    <button class="btn-back-circle" onclick="switchSbScreen('sb-screen-cafe')" aria-label="Закрыть"></button>
                     <div class="sb-kitchen-menu">
                         <button class="sb-kitchen-btn" onclick="switchSbScreen('sb-screen-book')">Книга рецептов</button>
                         <button class="sb-kitchen-btn" onclick="switchSbScreen('sb-screen-fridge')">Холодильник</button>
@@ -465,7 +473,7 @@
                     </div>
                     <button class="nav-arrow nav-left" onclick="moveCgCarousel('bk', -1)" aria-label="Назад">&lt;</button>
                     <button class="nav-arrow nav-right" onclick="moveCgCarousel('bk', 1)" aria-label="Вперёд">&gt;</button>
-                    <button class="btn-back-circle" onclick="switchSbScreen('sb-screen-kitchen')">Назад</button>
+                    <button class="btn-back-circle" onclick="switchSbScreen('sb-screen-kitchen')" aria-label="Закрыть"></button>
                 </div>
 
                 <div class="sb-screen" id="sb-screen-fridge">
@@ -477,7 +485,7 @@
                         <img src="potato2.PNG" class="cg-item hidden" alt="potato2" loading="lazy" onerror="fixExt(this)">
                         <img src="meat.PNG" class="cg-item hidden" alt="meat" loading="lazy" onerror="fixExt(this)">
                         <img src="pumpkin1.PNG" class="cg-item hidden" alt="pumpkin" loading="lazy" onerror="fixExt(this)">
-                        <img src="pumpkin2.PNG" class="cg-item hidden" alt="pumpkin2" loading="lazy" onerror="fixExt(this)">
+                        <img src="pumpkin2.PNG" class="cg-item hidden" alt="pumpkin" loading="lazy" onerror="fixExt(this)">
                         <img src="vegetables1.PNG" class="cg-item hidden" alt="vegetables1" loading="lazy" onerror="fixExt(this)">
                         <img src="vegetables2.PNG" class="cg-item hidden" alt="vegetables2" loading="lazy" onerror="fixExt(this)">
                         <img src="jug.PNG" class="cg-item hidden" alt="jug" loading="lazy" onerror="fixExt(this)">
@@ -493,12 +501,12 @@
                     </div>
                     <button class="nav-arrow nav-left" onclick="moveCgCarousel('fr', -1)" aria-label="Назад">&lt;</button>
                     <button class="nav-arrow nav-right" onclick="moveCgCarousel('fr', 1)" aria-label="Вперёд">&gt;</button>
-                    <button class="btn-back-circle" onclick="switchSbScreen('sb-screen-kitchen')">Назад</button>
+                    <button class="btn-back-circle" onclick="switchSbScreen('sb-screen-kitchen')" aria-label="Закрыть"></button>
                 </div>
 
                 <div class="sb-screen" id="sb-screen-board">
                     <img src="sauceboard.PNG" class="sb-bg-layer active" alt="Доска для готовки" loading="lazy">
-                    <button class="btn-back-circle" onclick="switchSbScreen('sb-screen-kitchen')">Назад</button>
+                    <button class="btn-back-circle" onclick="switchSbScreen('sb-screen-kitchen')" aria-label="Закрыть"></button>
                 </div>
             </div>
         </div>
@@ -511,7 +519,7 @@
             <button class="btn" onclick="openCgViewer('cg')">Просмотреть иллюстрации</button>
 
             <div class="cg-viewer" id="viewer-cg">
-                <button class="btn-back-circle" onclick="closeCgViewer('cg')" style="z-index: 20;">Назад</button>
+                <button class="btn-back-circle" onclick="closeCgViewer('cg')" aria-label="Закрыть" style="z-index: 20;"></button>
                 <button class="nav-arrow nav-left" onclick="moveCgCarousel('cg', -1)" aria-label="Назад">&lt;</button>
                 <button class="nav-arrow nav-right" onclick="moveCgCarousel('cg', 1)" aria-label="Вперёд">&gt;</button>
                 <div class="cg-carousel" id="carousel-cg">
@@ -532,7 +540,7 @@
             <button class="btn" onclick="openCgViewer('aw')">Просмотреть иллюстрации</button>
 
             <div class="cg-viewer" id="viewer-aw">
-                <button class="btn-back-circle" onclick="closeCgViewer('aw')" style="z-index: 20;">Назад</button>
+                <button class="btn-back-circle" onclick="closeCgViewer('aw')" aria-label="Закрыть" style="z-index: 20;"></button>
                 <button class="nav-arrow nav-left" onclick="moveCgCarousel('aw', -1)" aria-label="Назад">&lt;</button>
                 <button class="nav-arrow nav-right" onclick="moveCgCarousel('aw', 1)" aria-label="Вперёд">&gt;</button>
                 <div class="cg-carousel" id="carousel-aw">
@@ -563,7 +571,7 @@
 
 <div class="inventory-modal" id="inventory">
     <div class="inventory-content">
-        <button class="close-btn" onclick="closeInventory()">Закрыть инвентарь</button>
+        <button class="btn-back-circle" onclick="closeInventory()" aria-label="Закрыть"></button>
         <h2>Все нарисованные предметы и ассеты</h2>
         <div class="cg-viewer" id="viewer-inv">
             <button class="nav-arrow nav-left" onclick="moveCgCarousel('inv', -1)" aria-label="Назад">&lt;</button>
